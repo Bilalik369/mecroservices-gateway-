@@ -24,7 +24,7 @@ const services = {
     };
 
 
-    
+
     export const createServiceProxy = (serviceName) => {
         const serviceConfig = services[serviceName];
         
@@ -53,3 +53,6 @@ const services = {
           }
         });
       };
+
+
+      
