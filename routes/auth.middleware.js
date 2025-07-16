@@ -35,3 +35,23 @@ export const verifyToken = async (req, res, next) => {
     });
   }
 };
+
+
+export const checkRole  = (allowedRoles)=>{
+    return (req , res , next)=>{
+        if(!req.user){
+            return res.status(404).json({
+                success : false,
+                message : "Utilisateur non authentifié"
+            })
+        }
+        if(!allowedRoles.includes(req.user.role)){
+            return res.status(403).json({
+                success :false , 
+                message : "Accès refusé - Rôle insuffisant"
+            })
+        }
+        next();
+
+    }
+}
