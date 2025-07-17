@@ -4,24 +4,22 @@ import { createServiceProxy } from '../middleware/proxy.middleware.js';
 
 const router = express.Router();
 
+router.use('/register', createServiceProxy('auth'));
+router.use('/login', createServiceProxy('auth'));
+
 
 router.use('/api/auth', createServiceProxy('auth'));
-
-
-router.use('/api/apprenants', 
+router.use('/api/apprenants',
   verifyToken,
   checkRole(['ADMIN', 'FORMATEUR', 'APPRENANT']),
   createServiceProxy('apprenants')
 );
-
-router.use('/api/briefs', 
+router.use('/api/briefs',
   verifyToken,
   checkRole(['ADMIN', 'FORMATEUR', 'APPRENANT']),
   createServiceProxy('briefs')
 );
-
-
-router.use('/api/competences', 
+router.use('/api/competences',
   verifyToken,
   checkRole(['ADMIN', 'FORMATEUR']),
   createServiceProxy('competences')
